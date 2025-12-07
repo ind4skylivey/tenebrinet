@@ -36,9 +36,10 @@ _(Where code whispers in the shadows)_
 
 - [x] **Core Architecture** - Project structure & configuration
 - [x] **Base Services** - `BaseHoneypotService` abstract implementation
+- [x] **Data Layer** - PostgreSQL models & async session management
+- [x] **Logging** - Structured async logging with `structlog`
+- [x] **Configuration** - YAML loader with env var substitution & validation
 - [ ] **SSH Honeypot** - Credential capture & emulation
-- [ ] **Data Layer** - PostgreSQL models & Redis caching
-- [ ] **Logging** - Structured async logging with `structlog`
 - [ ] **ML Pipeline** - Initial threat classification model
 
 ---
