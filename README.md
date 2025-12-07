@@ -1,209 +1,158 @@
 <div align="center">
 
-# 🌑 TenebriNET
-<img width="3168" height="1344" alt="tenebrinet" src="https://github.com/user-attachments/assets/fd9b9259-86b4-454c-a26b-9ad6f3e9a9fb" />
+# TENEBRINET
+### ⫷ Intelligent Honeypot Infrastructure ⫸
+<img width="3168" height="1344" alt="tenebrinet" src="https://github.com/user-attachments/assets/e132aa31-4281-4ef9-8333-195101906b18" />
 
-### Intelligent Honeypot Infrastructure
+*Ubi codex in tenebris susurrat*
+*(Where code whispers in the shadows)*
 
-*Capture what hides in the dark*
+<br>
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/ind4skylivey/tenebrinet/ci.yml?branch=main&style=for-the-badge)](https://github.com/ind4skylivey/tenebrinet/actions)
-[![Security](https://img.shields.io/badge/security-A+-00ff9f?style=for-the-badge)]()
-[![Python](https://img.shields.io/badge/python-3.10+-7b2cbf?style=for-the-badge&logo=python)](https://www.python.org)
-[![License](https://img.shields.io/badge/license-MIT-1a0033?style=for-the-badge)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/ind4skylivey/tenebrinet?style=for-the-badge&color=7b2cbf)](https://github.com/ind4skylivey/tenebrinet/stargazers)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/ind4skylivey/tenebrinet/ci.yml?branch=main&style=for-the-badge&color=0d1117&labelColor=7b2cbf)](https://github.com/ind4skylivey/tenebrinet/actions)
+[![Security](https://img.shields.io/badge/security-HARDENED-00ff9f?style=for-the-badge&labelColor=0d1117&color=b00020)]()
+[![Python](https://img.shields.io/badge/python-3.10+-7b2cbf?style=for-the-badge&logo=python&labelColor=0d1117&logoColor=white)](https://www.python.org)
+[![License](https://img.shields.io/badge/license-MIT-1a0033?style=for-the-badge&labelColor=0d1117&color=525252)](LICENSE)
 
-[Documentation](https://github.com/ind4skylivey/tenebrinet/wiki) • 
-[Installation](#-quick-start) • 
-[Architecture](#-architecture) • 
-[Contribute](#-contributing)
+[📡 INTEL](https://github.com/ind4skylivey/tenebrinet/wiki) • 
+[⚡ DEPLOY](#-deployment-protocols) • 
+[💀 ARCHITECTURE](#-system-architecture) • 
+[👁️ RECON](#-operative-modules)
 
 </div>
 
 ---
 
-## 🎯 What is TenebriNET?
+## 📟 // SYSTEM_OVERVIEW
 
-**TenebriNET** is an ML-powered honeypot system that captures, analyzes, and visualizes cyber threats in real-time. Built for security researchers who want to understand how attackers operate in the wild.
+> **INITIALIZING TENEBRINET...**
+> Target Identification: Cyber Threats
+> Mode: Active Interception & Analysis
 
-### ✨ Key Features
-
-- 🕸️ **Multi-Service Honeypots** - Emulates SSH, HTTP, FTP services with realistic interactions
-- 🤖 **ML-Powered Classification** - Automatically categorizes attacks (recon, brute force, exploits, malware, botnet)
-- 🗺️ **Real-Time Visualization** - Interactive dashboard with global attack map
-- 📊 **Threat Intelligence** - Integration with AbuseIPDB, VirusTotal, Shodan
-- 🔄 **Attack Replay** - Record and replay complete attack sessions for forensic analysis
-- 📡 **WebSocket Live Feed** - Real-time attack notifications
-- 🐳 **Docker Ready** - One-command deployment with Docker Compose
-- 📈 **Prometheus Metrics** - Production-grade monitoring and alerting
+**TenebriNET** is not just a honeypot; it is an **ML-powered threat intelligence infrastructure**. Engineered for security researchers and Red Teamers who need to dissect how adversaries operate in the wild. It captures, analyzes, and visualizes attack vectors in real-time, turning darkness into actionable data.
 
 ---
 
-## 🚀 Quick Start
+## 👁️ // OPERATIVE_MODULES
 
-### Prerequisites
+| Module | Functionality | Status |
+| :--- | :--- | :---: |
+| **🕸️ Digital Simulacra** | High-fidelity emulation of **SSH, HTTP, FTP** services with realistic interactions. | `ACTIVE` |
+| **🧠 Neural Heuristics** | ML Engine that automatically classifies attacks (Recon, Brute Force, Exploits, Botnets). | `ONLINE` |
+| **🗺️ Panopticon View** | Interactive dashboard with global real-time attack map. | `ONLINE` |
+| **📡 Threat Feed** | Intelligence integration with **AbuseIPDB, VirusTotal, Shodan**. | `LINKED` |
+| **📼 Forensic Replay** | Full recording of attack sessions for post-incident forensic analysis. | `READY` |
+| **🐳 Dockerized** | One-command deployment for total environment isolation. | `READY` |
 
-- Python 3.10+
-- Docker & Docker Compose (recommended)
-- PostgreSQL 14+ (or use Docker)
-- Redis 6+ (or use Docker)
+---
 
-### Installation
+## ⚡ // DEPLOYMENT_PROTOCOLS
+
+### System Requirements
+* Python 3.10+
+* Docker & Docker Compose (Recommended)
+* PostgreSQL 14+ & Redis 6+
+
+### Initialization Sequence
 
 ```bash
-# Clone the repository
-git clone https://github.com/ind4skylivey/tenebrinet.git
+# ------------------------------------------------------------------
+# [1] INITIATING REPOSITORY CLONE
+# ------------------------------------------------------------------
+git clone [https://github.com/ind4skylivey/tenebrinet.git](https://github.com/ind4skylivey/tenebrinet.git)
 cd tenebrinet
 
-# Option 1: Docker (Recommended)
+# ------------------------------------------------------------------
+# [2] DEPLOYMENT VECTORS
+# ------------------------------------------------------------------
+
+# >> OPTION A: Engage Docker Swarm (Recommended)
 docker-compose up -d
 
-# Option 2: Manual Setup
+# >> OPTION B: Manual Injection
 python -m venv venv
-source venv/bin/activate  # or `venv\Scripts\activate` on Windows
+source venv/bin/activate
 pip install -r requirements.txt
 python -m tenebrinet.core.honeypot --config config/honeypot.yml
-```
 
-### First Run
+# ------------------------------------------------------------------
+# [3] SYSTEM BOOT SEQUENCE
+# ------------------------------------------------------------------
 
-```bash
-# Initialize database
+# [!] Initialize database schema
 python scripts/init_db.py
 
-# Start TenebriNET
+# [!] Execute Core System
 python -m tenebrinet.core.honeypot
 
-# Access dashboard
-open http://localhost:8080
-```
+# [+] SYSTEM ONLINE. LISTENING ON:
+# > http://localhost:8080
 
-## 🏗️ Architecture
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    ATTACK SOURCES                       │
-│           SSH Scanners | Web Crawlers | Bots           │
-└────────────────────┬────────────────────────────────────┘
-                     │
-          ┌──────────▼──────────┐
-          │  Honeypot Services  │
-          │  SSH | HTTP | FTP   │
-          └──────────┬──────────┘
-                     │
-          ┌──────────▼──────────┐
-          │   Logging Layer     │
-          │   PostgreSQL + Redis│
-          └──────────┬──────────┘
-                     │
-          ┌──────────▼──────────┐
-          │    ML Engine        │
-          │  Threat Classifier  │
-          └──────────┬──────────┘
-                     │
-          ┌──────────▼──────────┐
-          │   FastAPI + WS      │
-          │   Real-time API     │
-          └──────────┬──────────┘
-                     │
-          ┌──────────▼──────────┐
-          │  Vue.js Dashboard   │
-          │  Attack Map + Stats │
-          └─────────────────────┘
-```
+💀 // SYSTEM_ARCHITECTURE
+Code snippet
 
-### 📊 Threat Classification
+graph TD
+    A[☠️ ATTACK SOURCES] -->|SSH / HTTP / Bots| B(🛡️ Honeypot Services)
+    B -->|Raw Data| C{📝 Logging Layer}
+    C -->|PostgreSQL + Redis| D[🧠 ML Engine]
+    D -->|Threat Classification| E[🚀 FastAPI + WS]
+    E -->|Real-time Feed| F[💻 Vue.js Dashboard]
+    
+    style A fill:#b00020,stroke:#333,stroke-width:2px,color:#fff
+    style B fill:#1a0033,stroke:#7b2cbf,stroke-width:2px,color:#fff
+    style D fill:#7b2cbf,stroke:#fff,stroke-width:2px,color:#fff
+    style F fill:#0d1117,stroke:#00ff9f,stroke-width:2px,color:#fff
 
-TenebriNET's ML engine classifies attacks into 5 categories:
+Threat Classification Matrix
 
-| Category | Description | Indicators |
-|----------|-------------|------------|
-| 🔍 Reconnaissance | Port scans, service enumeration | Quick connects, banner grabbing |
-| 🔐 Brute Force | Credential stuffing, password spraying | Multiple login attempts |
-| 💥 Exploitation | CVE attempts, command injection | Malicious payloads, shellcode |
-| 🦠 Malware Deployment | Binary uploads, script execution | File transfers, chmod +x |
-| 🤖 Botnet Activity | C2 callbacks, DDoS participation | Periodic connections, distributed IPs |
+TenebriNET's neural engine identifies 5 main categories of hostility:
 
-### 🎨 Dashboard Preview
+    🔍 Reconnaissance: Port scans, service enumeration.
 
-> *Coming soon - Real-time attack visualization*
+    🔐 Brute Force: Credential stuffing, password spraying.
 
-## 🛠️ Configuration
+    💥 Exploitation: CVE attempts, command injection, shellcode.
 
-```yaml
+    🦠 Malware Deployment: Binary uploads, script execution, chmod +x.
+
+    🤖 Botnet Activity: C2 callbacks, DDoS participation.
+
+⚙️ // CONFIGURATION_VECTORS
+YAML
+
 # config/honeypot.yml
 services:
   ssh:
     enabled: true
     port: 2222
-    banner: "OpenSSH_8.2p1 Ubuntu-4ubuntu0.5"
+    banner: "OpenSSH_8.2p1 Ubuntu-4ubuntu0.5" # Deception Banner
   
-  http:
-    enabled: true
-    port: 8080
-    fake_cms: "WordPress 5.8"
-
 ml:
   model: "random_forest"
   retrain_interval: "24h"
   
 threat_intel:
-  abuseipdb_key: "${ABUSEIPDB_API_KEY}"
-  virustotal_key: "${VT_API_KEY}"
-```
+  abuseipdb_key: "${ABUSEIPDB_API_KEY}" # Redacted
 
-## 📚 Documentation
+🤝 // ALLIANCE
 
-- [Installation Guide](docs/guides/installation.md)
-- [Architecture Deep Dive](docs/guides/architecture.md)
-- [ML Model Training](docs/guides/ml-model.md)
-- [API Reference](docs/api-reference.md)
-- [Deployment Guide](docs/guides/deployment.md)
+Contributions are welcome. Check the CONTRIBUTING.md to join the network.
 
-## 🤝 Contributing
+Research Citation:
+Code snippet
 
-Contributions are welcome! Please check our [Contributing Guide](CONTRIBUTING.md).
-
-### Development Setup
-
-```bash
-# Install dev dependencies
-pip install -r requirements-dev.txt
-
-# Run tests
-pytest tests/ --cov=tenebrinet
-
-# Code formatting
-black tenebrinet/
-isort tenebrinet/
-```
-
-## 🔒 Security
-
-Found a vulnerability? Please see [SECURITY.md](SECURITY.md) for responsible disclosure.
-
-## 📖 Citation
-
-If you use TenebriNET in your research, please cite:
-
-```bibtex
 @software{tenebrinet2025,
   title={TenebriNET: Intelligent Honeypot Infrastructure},
   author={Fleming, Livey},
   year={2025},
-  url={https://github.com/ind4skylivey/tenebrinet}
+  url={[https://github.com/ind4skylivey/tenebrinet](https://github.com/ind4skylivey/tenebrinet)}
 }
-```
-
-## 📜 License
-
-[MIT License](LICENSE) - see LICENSE for details.
-
 
 <div align="center">
 
-**🌑 Where darkness meets defense**
+🌑 Where darkness meets defense
 
-Made with 💜 by [ind4skylivey](https://github.com/ind4skylivey)
+<sub>Made with 💜 & ☕ by <a href="https://github.com/ind4skylivey">ind4skylivey</a></sub>
 
 </div>
