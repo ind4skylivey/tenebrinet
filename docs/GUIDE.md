@@ -330,7 +330,6 @@ TenebriNET is **proprietary**, but I welcome collaboration from trusted research
 ## 📧 Contact
 
 **Livey Fleming**
-Email: livey@s1bgr0up.com
 GitHub: [@ind4skylivey](https://github.com/ind4skylivey)
 
 ---
