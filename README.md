@@ -88,24 +88,33 @@ cd tenebrinet
 # [2] Engage Docker Swarm (Recommended)
 docker-compose up -d
 
-# [3] Alternative: Manual Injection
+# [3] Populate with Sample Data (Optional - for immediate dashboard visualization)
+docker exec -it tenebrinet python scripts/seed_database.py
+
+# [4] Alternative: Manual Injection
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 python -m tenebrinet.core.honeypot --config config/honeypot.yml
+```
 
-First Boot
-Bash
+### First Boot
 
+```bash
 # Initialize database schema
 python -m tenebrinet.cli initdb
+
+# (Optional) Seed with sample attack data for demo
+python scripts/seed_database.py
 
 # Execute Core System
 python -m tenebrinet.cli run
 
 # Access Command Center
-# > http://localhost:8080
+# > http://localhost:8000
 ```
+
+> **💡 Pro Tip:** Run `seed_database.py` to populate the dashboard with 150 realistic attack samples spanning 7 days. This gives you immediate visual feedback and helps understand TenebriNET's capabilities without waiting for real attacks.
 
 ## <a id="architecture"></a>💀 // ARCHITECTURE
 
