@@ -1,44 +1,64 @@
-# Contributing to TenebriNET
+# 🤝 // ALLIANCE_PROTOCOL
 
-Thank you for your interest in contributing! 🌑
+> **"The network grows stronger with each node."**
 
-## How to Contribute
+TenebriNET is a proprietary system, but we welcome elite contributors to join the alliance. Access to the core protocol is granted based on merit and approval.
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/AmazingFeature`)
-3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** to the branch (`git push origin feature/AmazingFeature`)
-5. **Open** a Pull Request
+## 🔐 // ACCESS_CONTROL
 
-## Development Setup
+Contributing to TenebriNET is a privilege, not a right. All contributions are subject to strict review and must align with the project's strategic objectives.
+
+### 📜 Rules of Engagement
+
+1.  **Authorization Required**: Before starting major work, open an Issue to request clearance. Unsolicited major changes may be rejected.
+2.  **Security First**: Any code that compromises the stealth or security of the infrastructure will be purged.
+3.  **Intellectual Property**: By contributing, you agree that your code becomes part of the proprietary TenebriNET codebase under the project's license.
+
+## 🛠️ // INFILTRATION_GUIDE (How to Contribute)
+
+1.  **Fork the Repository**: Create your own shadow copy.
+2.  **Create a Feature Branch**: `git checkout -b feature/CodeName`
+3.  **Execute Changes**: Implement your enhancements.
+4.  **Commit with Precision**: `git commit -m 'feat: implement new detection vector'`
+5.  **Push to Origin**: `git push origin feature/CodeName`
+6.  **Open a Pull Request**: Submit your code for review by the Core Team.
+
+## 💻 // DEV_ENVIRONMENT
 
 ```bash
+# Clone the repository
 git clone https://github.com/ind4skylivey/tenebrinet.git
 cd tenebrinet
+
+# Initialize virtual environment
 python -m venv venv
 source venv/bin/activate
+
+# Install development dependencies
 pip install -r requirements-dev.txt
 ```
 
-### Code Standards
+## 📏 // CODE_STANDARDS
 
-- Black for formatting
-- isort for import sorting
-- mypy for type checking
-- pytest for testing (80%+ coverage)
+We maintain absolute code discipline.
 
-### Pull Request Guidelines
+- **Formatting**: `Black` (Non-negotiable)
+- **Imports**: `isort`
+- **Typing**: `mypy` (Strict mode)
+- **Testing**: `pytest` (Must maintain >80% coverage)
 
-- Link to related issue
-- Update documentation
-- Add tests for new features
-- Ensure all tests pass
-- Follow commit message conventions
+## 🎯 // MISSION_OBJECTIVES
 
-### Areas for Contribution
+We are currently seeking specialists for:
 
-- 🐛 Bug fixes
-- 📝 Documentation improvements
-- 🚀 New honeypot service implementations
-- 🤖 ML model enhancements
-- 🎨 Dashboard UI improvements
+- 🐛 **Bug Neutralization**
+- 📝 **Documentation Encryption** (Improvements)
+- 🚀 **New Simulacra** (Additional Honeypot Services)
+- 🤖 **Neural Enhancement** (ML Model tuning)
+- 🎨 **Visual Interface** (Dashboard UI)
+
+---
+
+<div align="center">
+  <sub>Join the Alliance. Defend the Network.</sub>
+</div>
