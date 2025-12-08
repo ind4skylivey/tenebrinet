@@ -24,8 +24,16 @@ DATABASE_URL = os.getenv(
     "postgresql+asyncpg://user:password@localhost/tenebrinet_db",
 )
 
-# Create the async engine
-engine = create_async_engine(DATABASE_URL, echo=False)
+# Create the async engine with connection pooling
+engine = create_async_engine(
+    DATABASE_URL,
+    echo=False,
+    pool_size=20,              # Maximum number of connections to keep in the pool
+    max_overflow=10,           # Maximum number of connections that can be created beyond pool_size
+    pool_timeout=30,           # Seconds to wait before giving up on getting a connection
+    pool_recycle=3600,         # Recycle connections after 1 hour to prevent stale connections
+    pool_pre_ping=True,        # Verify connections before using them
+)
 
 # Create a sessionmaker for async sessions
 AsyncSessionLocal = async_sessionmaker(

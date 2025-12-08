@@ -100,7 +100,16 @@ async def get_attack_stats(
     Get attack statistics.
 
     Returns aggregated statistics about attacks.
+    Stats are cached for 30 seconds to reduce database load.
     """
+    from tenebrinet.core.cache import cache
+
+    # Try to get from cache first
+    cache_key = "stats:attacks"
+    cached_stats = await cache.get(cache_key)
+    if cached_stats:
+        return AttackStats(**cached_stats)
+
     # Total attacks
     total_result = await db.execute(select(func.count(Attack.id)))
     total_attacks = total_result.scalar() or 0
@@ -155,7 +164,7 @@ async def get_attack_stats(
         row[0]: row[1] for row in by_threat_result.all()
     }
 
-    return AttackStats(
+    stats = AttackStats(
         total_attacks=total_attacks,
         attacks_today=attacks_today,
         unique_ips=unique_ips,
@@ -163,6 +172,11 @@ async def get_attack_stats(
         attacks_by_service=attacks_by_service,
         attacks_by_threat_type=attacks_by_threat_type,
     )
+
+    # Cache the result for 30 seconds
+    await cache.set(cache_key, stats.model_dump(), ttl=30)
+
+    return stats
 
 
 @router.get("/{attack_id}", response_model=AttackResponse)
