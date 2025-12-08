@@ -244,9 +244,11 @@ class HTTPHoneypot:
         if real_ip:
             return real_ip
 
-        peername = request.transport.get_extra_info("peername")
-        if peername:
-            return peername[0]
+        if request.transport:
+            transport = request.transport
+            peername = transport.get_extra_info("peername")
+            if peername:
+                return peername[0]
 
         return "unknown"
 
@@ -383,8 +385,9 @@ class HTTPHoneypot:
 
         try:
             data = await request.post()
-            username = data.get("log", "")
-            password = data.get("pwd", "")
+            # Ensure we get strings, not FileFields
+            username = str(data.get("log", ""))
+            password = str(data.get("pwd", ""))
 
             if username or password:
                 await self._record_credential(client_ip, username, password)

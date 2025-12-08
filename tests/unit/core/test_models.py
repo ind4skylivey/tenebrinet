@@ -2,15 +2,14 @@
 """Unit tests for TenebriNET ORM models."""
 import uuid
 from datetime import datetime, timezone
-from unittest.mock import patch
 
-import pytest
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.orm import RelationshipProperty
 from sqlalchemy.sql.schema import CallableColumnDefault
-from sqlalchemy.sql.sqltypes import Boolean, DateTime, Float, Integer, JSON, String
+from sqlalchemy.sql.sqltypes import (
+    Boolean, DateTime, Float, Integer, JSON, String
+)
 
-from tenebrinet.core.database import Base
 from tenebrinet.core.models import Attack, Credential, Session
 
 

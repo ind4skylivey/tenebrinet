@@ -15,10 +15,10 @@ _(Where code whispers in the shadows)_
 [![Python](https://img.shields.io/badge/python-3.10+-7b2cbf?style=for-the-badge&logo=python&labelColor=0d1117&logoColor=white)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-MIT-1a0033?style=for-the-badge&labelColor=0d1117&color=525252)](LICENSE)
 
-[📡 INTEL](https://github.com/ind4skylivey/tenebrinet/wiki) •
-[⚡ DEPLOY](#-deployment-protocols) •
-[💀 ARCHITECTURE](#-system-architecture) •
-[👁️ RECON](#-operative-modules)
+[📡 INTEL](#--intel) •
+[⚡ DEPLOY](#--deploy) •
+[💀 ARCHITECTURE](#--architecture) •
+[👁️ RECON](#--recon)
 
 </div>
 
@@ -31,6 +31,13 @@ _(Where code whispers in the shadows)_
 > Mode: Active Interception & Analysis
 
 **TenebriNET** is not just a honeypot; it is an **ML-powered threat intelligence infrastructure**. Engineered for security researchers and Red Teamers who need to dissect how adversaries operate in the wild. It captures, analyzes, and visualizes attack vectors in real-time, turning darkness into actionable data.
+
+## 🖥️ // LIVE_DEMO
+
+<div align="center">
+  <img src="assets/dashboard_demo.gif" alt="TenebriNET Live Dashboard" width="100%">
+  <p><em>Real-time attack visualization and threat monitoring</em></p>
+</div>
 
 ### 🚧 Development Status
 
@@ -48,7 +55,7 @@ _(Where code whispers in the shadows)_
 
 ---
 
-## 👁️ // OPERATIVE_MODULES
+## 👁️ // RECON
 
 | Module                   | Functionality                                                                            |  Status   |
 | :----------------------- | :--------------------------------------------------------------------------------------- | :-------: |
@@ -62,7 +69,7 @@ _(Where code whispers in the shadows)_
 
 ---
 
-## ⚡ // DEPLOYMENT_PROTOCOLS
+## ⚡ // DEPLOY
 
 ### System Requirements
 
@@ -90,16 +97,16 @@ First Boot
 Bash
 
 # Initialize database schema
-python scripts/init_db.py
+python -m tenebrinet.cli initdb
 
 # Execute Core System
-python -m tenebrinet.core.honeypot
+python -m tenebrinet.cli run
 
 # Access Command Center
 # > http://localhost:8080
 ```
 
-## 💀 // SYSTEM_ARCHITECTURE
+## 💀 // ARCHITECTURE
 
 ```mermaid
 graph TD
@@ -115,6 +122,14 @@ graph TD
     style F fill:#0d1117,stroke:#00ff9f,stroke-width:2px,color:#fff
 ```
 
+````
+
+## 📡 // INTEL
+
+> **INTELLIGENCE EXTRACTION PROTOCOL**
+
+TenebriNET aggregates raw attack data into actionable intelligence through its Neural Engine.
+
 ```text
 [!] THREAT_CLASSIFICATION_MATRIX
 
@@ -126,7 +141,7 @@ ID      CLASS               DETECTED BEHAVIOR             SIGNATURES
 0x03    💥 Exploitation     Vulnerability leveraging      CVE payloads, Shellcode
 0x04    🦠 Malware Drop     Payload delivery              Binary upload, chmod +x
 0x05    🤖 Botnet           Distributed coordination      C2 Callbacks, DDoS pattern
-```
+````
 
 ## ⚙️ // CONFIGURATION_VECTORS
 

@@ -7,7 +7,7 @@ logs file transfer attempts and commands.
 """
 import asyncio
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Optional, List
 import uuid
 
 import structlog
@@ -570,7 +570,7 @@ class FTPClientHandler:
         try:
             for f in files:
                 if f["name"] not in (".", ".."):
-                    line = f["name"] + "\r\n"
+                    line = str(f["name"]) + "\r\n"
                     self.data_writer.write(line.encode("utf-8"))
             await self.data_writer.drain()
         finally:
@@ -604,7 +604,7 @@ class FTPClientHandler:
 
         # Handle . and ..
         parts = result.split("/")
-        resolved = []
+        resolved: List[str] = []
         for part in parts:
             if part == "..":
                 if resolved:
@@ -684,16 +684,16 @@ class FTPClientHandler:
                 )
                 session.add(attack)
                 await session.flush()
-                self.attack_id = attack.id
+                self.attack_id = attack.id  # type: ignore
 
                 # Create session record
                 sess = Session(
-                    attack_id=attack.id,
+                    attack_id=attack.id,  # type: ignore
                     commands=self.commands,
                 )
                 session.add(sess)
                 await session.flush()
-                self.session_id = sess.id
+                self.session_id = sess.id  # type: ignore
 
                 await session.commit()
                 logger.info(
@@ -731,8 +731,10 @@ class FTPClientHandler:
             async with AsyncSessionLocal() as session:
                 result = await session.get(Session, self.session_id)
                 if result:
-                    result.end_time = datetime.now(timezone.utc)
-                    result.commands = self.commands
+                    # Explicitly cast or ignore type check for SQLAlchemy
+                    # model assignment if mypy complains about Column vs Type
+                    result.end_time = datetime.now(timezone.utc)  # type: ignore  # noqa: E501
+                    result.commands = self.commands  # type: ignore
                     await session.commit()
         except Exception as e:
             logger.error("ftp_session_close_failed", error=str(e))

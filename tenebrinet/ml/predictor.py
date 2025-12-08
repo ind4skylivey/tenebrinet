@@ -38,12 +38,15 @@ class ThreatPredictor:
                 logger.warning(
                     "ml_model_not_found",
                     path=self.config.model_path,
-                    msg="Predictions will be unavailable until model is trained"
+                    msg="Predictions unavailable until model is trained"
                 )
         except Exception as e:
             logger.error("ml_model_load_failed", error=str(e))
 
-    def predict_one(self, attack_data: Dict[str, Any]) -> Tuple[Optional[str], float]:
+    def predict_one(
+        self,
+        attack_data: Dict[str, Any]
+    ) -> Tuple[Optional[str], float]:
         """
         Predict threat type for a single attack.
 

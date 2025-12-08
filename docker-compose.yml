@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   tenebrinet:
     build: .
@@ -13,7 +11,7 @@ services:
       - postgres
       - redis
     environment:
-      - DATABASE_URL=postgresql://tenebrinet:tenebripass@postgres:5432/tenebrinet
+      - DATABASE_URL=postgresql+asyncpg://tenebrinet:tenebripass@postgres:5432/tenebrinet
       - REDIS_URL=redis://redis:6379/0
     volumes:
       - ./data/logs:/app/data/logs
@@ -46,19 +44,7 @@ services:
     networks:
       - tenebrinet-network
 
-  dashboard:
-    build:
-      context: ./dashboard
-      dockerfile: Dockerfile
-    container_name: tenebrinet-dashboard
-    ports:
-      - "3000:3000"
-    environment:
-      - VITE_API_URL=http://localhost:8000
-    depends_on:
-      - tenebrinet
-    networks:
-      - tenebrinet-network
+
 
 volumes:
   postgres-data:

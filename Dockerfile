@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application
 COPY tenebrinet/ ./tenebrinet/
 COPY config/ ./config/
-COPY scripts/ ./scripts/
+
 
 # Create data directories
 RUN mkdir -p data/logs data/models

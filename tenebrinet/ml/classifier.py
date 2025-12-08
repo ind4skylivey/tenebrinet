@@ -26,7 +26,11 @@ class ThreatClassifier:
         self.model: Optional[BaseEstimator] = None
         self.classes_: Optional[np.ndarray] = None
 
-    def train(self, X_raw: List[Dict[str, Any]], y: List[str]) -> Dict[str, float]:
+    def train(
+        self,
+        X_raw: List[Dict[str, Any]],
+        y: List[str]
+    ) -> Dict[str, float]:
         """
         Train the model on raw data.
 
@@ -55,7 +59,10 @@ class ThreatClassifier:
 
         return {"accuracy": score}
 
-    def predict(self, X_raw: List[Dict[str, Any]]) -> Tuple[List[str], List[float]]:
+    def predict(
+        self,
+        X_raw: List[Dict[str, Any]]
+    ) -> Tuple[List[str], List[float]]:
         """
         Predict threat types for new data.
 
@@ -76,6 +83,10 @@ class ThreatClassifier:
         # Get max probability and corresponding class
         max_probas_indices = np.argmax(probas, axis=1)
         confidences = np.max(probas, axis=1)
+
+        if self.classes_ is None:
+            raise RuntimeError("Model classes not initialized")
+
         predictions = self.classes_[max_probas_indices]
 
         return predictions.tolist(), confidences.tolist()

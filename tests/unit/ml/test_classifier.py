@@ -3,9 +3,10 @@
 Unit tests for ML classifier and feature extraction.
 """
 import os
-import pytest
 import tempfile
 from typing import List, Dict, Any
+
+import pytest
 
 from tenebrinet.ml.classifier import ThreatClassifier
 from tenebrinet.ml.features import FeatureExtractor
@@ -103,7 +104,9 @@ class TestThreatClassifier:
 
     def test_save_load(self, sample_data, sample_labels):
         """Test model persistence."""
-        with tempfile.NamedTemporaryFile(suffix=".joblib", delete=False) as tmp:
+        with tempfile.NamedTemporaryFile(
+            suffix=".joblib", delete=False
+        ) as tmp:
             model_path = tmp.name
 
         try:

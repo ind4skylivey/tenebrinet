@@ -2,7 +2,7 @@
 """
 Feature extraction for TenebriNET ML pipeline.
 
-Converts raw attack data into numerical features for model training and inference.
+Converts raw attack data into numerical features for model training.
 """
 import json
 import re
@@ -27,7 +27,11 @@ class FeatureExtractor(BaseEstimator, TransformerMixin):
         self.pipeline: Optional[Pipeline] = None
         self._is_fitted = False
 
-    def fit(self, X: List[Dict[str, Any]], y: Any = None) -> "FeatureExtractor":
+    def fit(
+        self,
+        X: List[Dict[str, Any]],
+        y: Any = None
+    ) -> "FeatureExtractor":
         """
         Fit the feature extractor to the data.
 
@@ -50,7 +54,10 @@ class FeatureExtractor(BaseEstimator, TransformerMixin):
         ])
 
         categorical_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='constant', fill_value='unknown')),
+            (
+                'imputer',
+                SimpleImputer(strategy='constant', fill_value='unknown')
+            ),
             ('onehot', OneHotEncoder(handle_unknown='ignore'))
         ])
 
@@ -70,7 +77,9 @@ class FeatureExtractor(BaseEstimator, TransformerMixin):
         Transform raw data into feature matrix.
         """
         if not self._is_fitted or self.pipeline is None:
-            raise RuntimeError("FeatureExtractor must be fitted before transform")
+            raise RuntimeError(
+                "FeatureExtractor must be fitted before transform"
+            )
 
         df = self._preprocess(X)
         return self.pipeline.transform(df)
@@ -93,7 +102,9 @@ class FeatureExtractor(BaseEstimator, TransformerMixin):
             timestamp = item.get("timestamp")
             if isinstance(timestamp, str):
                 try:
-                    dt = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
+                    dt = datetime.fromisoformat(
+                        timestamp.replace("Z", "+00:00")
+                    )
                     hour = dt.hour
                 except ValueError:
                     hour = 0
@@ -106,17 +117,34 @@ class FeatureExtractor(BaseEstimator, TransformerMixin):
             payload_str = str(payload).lower()
 
             # Keyword counting
-            sqli_keywords = len(re.findall(r"(union|select|insert|drop|update|where|from)", payload_str))
-            xss_keywords = len(re.findall(r"(script|alert|onload|onerror|img|svg|iframe)", payload_str))
-            path_traversal_keywords = len(re.findall(r"(\.\./|\.\.\\|/etc/passwd|c:\\windows)", payload_str))
+            sqli_keywords = len(re.findall(
+                r"(union|select|insert|drop|update|where|from)",
+                payload_str
+            ))
+            xss_keywords = len(re.findall(
+                r"(script|alert|onload|onerror|img|svg|iframe)",
+                payload_str
+            ))
+            path_traversal_keywords = len(re.findall(
+                r"(\.\./|\.\.\\|/etc/passwd|c:\\windows)",
+                payload_str
+            ))
 
             # User Agent analysis
-            user_agent = payload.get("user_agent", "").lower() if isinstance(payload, dict) else ""
-            is_scanner = 1 if any(s in user_agent for s in ["nmap", "nikto", "sqlmap", "curl", "python"]) else 0
+            user_agent = ""
+            if isinstance(payload, dict):
+                user_agent = payload.get("user_agent", "").lower()
+
+            scanners = ["nmap", "nikto", "sqlmap", "curl", "python"]
+            is_scanner = 1 if any(s in user_agent for s in scanners) else 0
+
+            method = "unknown"
+            if isinstance(payload, dict):
+                method = payload.get("method", "unknown")
 
             processed_data.append({
                 "service": item.get("service", "unknown"),
-                "method": payload.get("method", "unknown") if isinstance(payload, dict) else "unknown",
+                "method": method,
                 "payload_len": len(payload_str),
                 "hour": hour,
                 "is_scanner": is_scanner,

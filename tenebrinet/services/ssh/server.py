@@ -8,7 +8,7 @@ a minimal shell environment for attacker interaction logging.
 import asyncio
 import uuid
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Optional, List, Any
 
 import asyncssh
 import structlog
@@ -105,11 +105,11 @@ class SSHHoneypotServer(asyncssh.SSHServer):
                 session.add(attack)
                 await session.flush()
 
-                self.attack_id = attack.id
+                self.attack_id = attack.id  # type: ignore
 
                 # Create the credential record
                 credential = Credential(
-                    attack_id=attack.id,
+                    attack_id=attack.id,  # type: ignore
                     username=username,
                     password=password,
                     success=True,  # We let them "succeed"
@@ -303,12 +303,12 @@ class SSHHoneypotSession(asyncssh.SSHServerSession):
         try:
             async with AsyncSessionLocal() as db_session:
                 session = Session(
-                    attack_id=self.server.attack_id,
+                    attack_id=self.server.attack_id,  # type: ignore
                     commands=[],
                 )
                 db_session.add(session)
                 await db_session.commit()
-                self.session_id = session.id
+                self.session_id = session.id  # type: ignore
                 logger.info(
                     "ssh_session_created",
                     session_id=str(session.id),
@@ -326,12 +326,12 @@ class SSHHoneypotSession(asyncssh.SSHServerSession):
             async with AsyncSessionLocal() as db_session:
                 result = await db_session.get(Session, self.session_id)
                 if result:
-                    commands = result.commands or []
+                    commands: List[Any] = result.commands or []  # type: ignore
                     commands.append({
                         "cmd": command,
                         "timestamp": datetime.now(timezone.utc).isoformat(),
                     })
-                    result.commands = commands
+                    result.commands = commands  # type: ignore
                     await db_session.commit()
         except Exception as e:
             logger.error("ssh_command_record_failed", error=str(e))
@@ -361,7 +361,7 @@ class SSHHoneypotSession(asyncssh.SSHServerSession):
             async with AsyncSessionLocal() as db_session:
                 result = await db_session.get(Session, self.session_id)
                 if result:
-                    result.end_time = datetime.now(timezone.utc)
+                    result.end_time = datetime.now(timezone.utc)  # type: ignore  # noqa: E501
                     await db_session.commit()
         except Exception as e:
             logger.error("ssh_session_close_failed", error=str(e))
@@ -396,7 +396,7 @@ class SSHHoneypot:
 
         try:
             # Generate or load host key
-            host_key = asyncssh.generate_private_key("ssh-rsa", 2048)
+            host_key = asyncssh.generate_private_key("ssh-rsa", key_size=2048)
 
             self.server = await asyncssh.create_server(
                 lambda: SSHHoneypotServer(self),

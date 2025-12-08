@@ -1,9 +1,10 @@
 # tests/unit/core/test_config.py
 import pytest
 import os
-import yaml
-from pydantic import ValidationError
-from tenebrinet.core.config import load_config, substitute_env_vars, TenebriNetConfig
+from tenebrinet.core.config import (
+    load_config, substitute_env_vars, TenebriNetConfig
+)
+
 
 @pytest.fixture
 def valid_config_yaml(tmp_path):
@@ -62,6 +63,7 @@ logging:
     config_file.write_text(config_content)
     return str(config_file)
 
+
 def test_load_valid_config(valid_config_yaml):
     config = load_config(valid_config_yaml)
     assert isinstance(config, TenebriNetConfig)
@@ -69,6 +71,7 @@ def test_load_valid_config(valid_config_yaml):
     assert config.services.ftp.enabled is False
     assert config.database.pool_size == 5
     assert config.logging.level == "DEBUG"
+
 
 def test_env_var_substitution(tmp_path):
     config_content = """
@@ -129,20 +132,26 @@ logging:
         if "DB_URL" in os.environ:
             del os.environ["DB_URL"]
 
+
 def test_env_var_default_value(tmp_path):
     # Test extracting default value when env var is missing
     content = "port: ${MISSING_VAR:8080}"
     result = substitute_env_vars(content)
     assert result == "port: 8080"
 
+
 def test_invalid_config_structure(tmp_path):
     config_file = tmp_path / "invalid.yml"
     # This is invalid YAML syntax that causes a parser error
     config_file.write_text("invalid: yaml: content")
-    
+
     # Match either YAML parser error OR Pydantic validation error
-    with pytest.raises(ValueError, match="(Invalid configuration|Error parsing YAML configuration)"):
+    with pytest.raises(
+        ValueError,
+        match="(Invalid configuration|Error parsing YAML configuration)"
+    ):
         load_config(str(config_file))
+
 
 def test_missing_file():
     with pytest.raises(FileNotFoundError):
