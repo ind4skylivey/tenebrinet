@@ -15,7 +15,7 @@ _(Where code whispers in the shadows)_
 [![Python](https://img.shields.io/badge/python-3.10+-7b2cbf?style=for-the-badge&logo=python&labelColor=0d1117&logoColor=white)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-PROPRIETARY-ff0000?style=for-the-badge&labelColor=0d1117&color=b00020)](LICENSE)
 
-[📡 INTEL](#intel) •
+[📡 INTEL](https://github.com/ind4skylivey/tenebrinet/discussions/1) •
 [⚡ DEPLOY](#deploy) •
 [💀 ARCHITECTURE](#architecture) •
 [👁️ RECON](#recon)
