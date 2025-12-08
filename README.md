@@ -16,6 +16,7 @@ _(Where code whispers in the shadows)_
 [![License](https://img.shields.io/badge/license-PROPRIETARY-ff0000?style=for-the-badge&labelColor=0d1117&color=b00020)](LICENSE)
 
 [📡 INTEL](https://github.com/ind4skylivey/tenebrinet/discussions/1) •
+[📖 GUIDE](https://github.com/ind4skylivey/tenebrinet/blob/main/docs/GUIDE.md) •
 [⚡ DEPLOY](#deploy) •
 [💀 ARCHITECTURE](#architecture) •
 [👁️ RECON](#recon)
