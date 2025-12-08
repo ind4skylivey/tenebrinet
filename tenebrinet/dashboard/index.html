@@ -156,6 +156,80 @@
           <h2>Global Threat Map</h2>
           <div id="threat-map" style="height: 600px; width: 100%; border-radius: 8px; border: 1px solid #334155;"></div>
         </div>
+
+        <div id="settings-view" class="view">
+          <h2>System Configuration</h2>
+          <div class="settings-container" style="max-width: 800px; margin-top: 20px;">
+
+            <div class="setting-group" style="background: #1e293b; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #334155;">
+              <h3 style="margin-bottom: 15px; color: #94a3b8; border-bottom: 1px solid #334155; padding-bottom: 10px;">
+                <i class="fa-solid fa-desktop"></i> Interface
+              </h3>
+              <div class="setting-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div>
+                  <label style="display: block; font-weight: 600;">Dark Mode</label>
+                  <small style="color: #64748b;">Enable high-contrast dark theme</small>
+                </div>
+                <label class="switch" style="position: relative; display: inline-block; width: 50px; height: 24px;">
+                  <input type="checkbox" checked disabled>
+                  <span class="slider round" style="position: absolute; cursor: not-allowed; top: 0; left: 0; right: 0; bottom: 0; background-color: #3b82f6; transition: .4s; border-radius: 34px;"></span>
+                  <span style="position: absolute; content: ''; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; transform: translateX(26px);"></span>
+                </label>
+              </div>
+              <div class="setting-item" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <label style="display: block; font-weight: 600;">Refresh Rate</label>
+                  <small style="color: #64748b;">Dashboard data polling interval</small>
+                </div>
+                <select style="background: #0f172a; border: 1px solid #334155; color: #e2e8f0; padding: 5px 10px; border-radius: 4px;">
+                  <option value="5000" selected>5 Seconds</option>
+                  <option value="10000">10 Seconds</option>
+                  <option value="30000">30 Seconds</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="setting-group" style="background: #1e293b; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #334155;">
+              <h3 style="margin-bottom: 15px; color: #94a3b8; border-bottom: 1px solid #334155; padding-bottom: 10px;">
+                <i class="fa-solid fa-shield-halved"></i> Security Modules
+              </h3>
+              <div class="setting-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div>
+                  <label style="display: block; font-weight: 600;">SSH Honeypot</label>
+                  <small style="color: #64748b;">Port 2222 emulation</small>
+                </div>
+                <div style="color: #10b981; font-weight: bold;"><i class="fa-solid fa-circle-check"></i> ACTIVE</div>
+              </div>
+              <div class="setting-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div>
+                  <label style="display: block; font-weight: 600;">HTTP Honeypot</label>
+                  <small style="color: #64748b;">Port 8080 emulation</small>
+                </div>
+                <div style="color: #10b981; font-weight: bold;"><i class="fa-solid fa-circle-check"></i> ACTIVE</div>
+              </div>
+              <div class="setting-item" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <label style="display: block; font-weight: 600;">FTP Honeypot</label>
+                  <small style="color: #64748b;">Port 2121 emulation</small>
+                </div>
+                <div style="color: #10b981; font-weight: bold;"><i class="fa-solid fa-circle-check"></i> ACTIVE</div>
+              </div>
+            </div>
+
+            <div class="setting-group" style="background: #1e293b; padding: 20px; border-radius: 8px; border: 1px solid #334155;">
+              <h3 style="margin-bottom: 15px; color: #94a3b8; border-bottom: 1px solid #334155; padding-bottom: 10px;">
+                <i class="fa-solid fa-database"></i> Data Management
+              </h3>
+              <div class="setting-item">
+                <button class="btn-danger" style="background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%;">
+                  <i class="fa-solid fa-trash"></i> Purge All Logs
+                </button>
+                <p style="margin-top: 10px; color: #ef4444; font-size: 0.8em; text-align: center;">Warning: This action is irreversible.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </main>
     </div>
     <script src="/static/js/app.js"></script>
