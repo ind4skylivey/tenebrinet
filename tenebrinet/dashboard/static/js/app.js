@@ -23,15 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Uptime counter
     startUptimeCounter();
-
-    // DEMO MODE: Auto-cycle tabs for recording
-    let tabs = ['dashboard', 'attacks', 'map', 'settings'];
-    let currentTab = 0;
-    setInterval(() => {
-        currentTab = (currentTab + 1) % tabs.length;
-        const tabId = tabs[currentTab];
-        document.querySelector(`[data-tab="${tabId}"]`).click();
-    }, 5000);
 });
 
 function initNavigation() {
@@ -132,18 +123,21 @@ function initMap() {
     // Initialize Leaflet Map
     map = L.map('threat-map').setView([20, 0], 2); // World view
 
-    // Dark Mode Tile Layer (CartoDB Dark Matter)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
+    // Standard OSM Tiles (Most reliable)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
         maxZoom: 19
     }).addTo(map);
+
+    // Add CSS filter to make standard map look "Dark Mode"
+    document.querySelector('.leaflet-tile-pane').style.filter = 'invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%)';
 
     // Add some initial sample markers to show it's working immediately
     const samples = [
         {lat: 40.7128, lng: -74.0060, ip: "192.168.1.5", type: "SSH_BRUTE_FORCE"},
         {lat: 51.5074, lng: -0.1278, ip: "10.0.0.2", type: "HTTP_SQLI"},
-        {lat: 35.6762, lng: 139.6503, ip: "172.16.0.8", type: "PORT_SCAN"}
+        {lat: 35.6762, lng: 139.6503, ip: "172.16.0.8", type: "PORT_SCAN"},
+        {lat: -33.8688, lng: 151.2093, ip: "10.10.10.10", type: "DDOS_ATTEMPT"}
     ];
 
     samples.forEach(s => {
@@ -156,6 +150,9 @@ function initMap() {
             fillOpacity: 0.8
         }).addTo(map).bindPopup(`<b>${s.ip}</b><br>${s.type}`);
     });
+
+    // Force a resize after init
+    setTimeout(() => { map.invalidateSize(); }, 200);
 }
 
 async function updateDashboard() {
